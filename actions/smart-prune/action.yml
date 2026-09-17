@@ -1,0 +1,35 @@
+name: 'RobinHood Smart Prune'
+description: 'Slashes up to 70% of CI runs by intelligently filtering unchanged monorepo paths.'
+author: 'Adrian Wulf (RobinHood dev)'
+branding:
+  icon: 'shield'
+  color: 'green'
+
+inputs:
+  filters:
+    description: 'YAML or multiline mapping of component names to glob patterns.'
+    required: true
+  base_ref:
+    description: 'Target base git ref/sha to diff against. Defaults to PR base or HEAD~1.'
+    required: false
+    default: ''
+  working_directory:
+    description: 'Working directory to run git diff in.'
+    required: false
+    default: '.'
+  summary:
+    description: 'Whether to write the RobinHood Scoreboard to GITHUB_STEP_SUMMARY.'
+    required: false
+    default: 'true'
+
+outputs:
+  any_changed:
+    description: 'Boolean flag ("true" or "false") if any configured filter matched changed files.'
+  changed_modules:
+    description: 'JSON string array of all component names that have changes.'
+  all_outputs:
+    description: 'JSON object with boolean flags for each defined filter.'
+
+runs:
+  using: 'node20'
+  main: 'index.js'
