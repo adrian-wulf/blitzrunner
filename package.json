@@ -1,0 +1,29 @@
+{
+  "name": "robinhood-ci",
+  "version": "1.0.0",
+  "description": "Zero-server, high-speed CI optimization suite under the RobinHood dev philosophy.",
+  "main": "bin/robinhood-ci.js",
+  "bin": {
+    "robinhood-ci": "bin/robinhood-ci.js",
+    "robin-ci": "bin/robinhood-ci.js"
+  },
+  "scripts": {
+    "test": "node test/prune.test.js"
+  },
+  "keywords": [
+    "ci",
+    "github-actions",
+    "monorepo",
+    "hetzner",
+    "runner",
+    "ephemeral-runner",
+    "cost-saving",
+    "robinhood-dev"
+  ],
+  "author": "Adrian Wulf (RobinHood dev)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrian-wulf/robinhood-ci.git"
+  }
+}

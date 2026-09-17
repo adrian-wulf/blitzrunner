@@ -1,0 +1,59 @@
+name: 'RobinHood Ephemeral Cloud Runner'
+description: 'Spawns disposable, high-performance cloud runners on Hetzner Cloud on demand for pennies.'
+author: 'Adrian Wulf (RobinHood dev)'
+branding:
+  icon: 'cpu'
+  color: 'orange'
+
+inputs:
+  mode:
+    description: 'Operation mode: "start" (provision VM & register runner) or "stop" (destroy VM).'
+    required: false
+    default: 'start'
+  hcloud_token:
+    description: 'Hetzner Cloud API Token.'
+    required: true
+  github_token:
+    description: 'GitHub Personal Access Token (PAT) with repo/admin:org scope to generate runner registration tokens.'
+    required: false
+    default: ''
+  server_id:
+    description: 'Hetzner server ID to destroy (required when mode is "stop").'
+    required: false
+    default: ''
+  server_type:
+    description: 'Hetzner server type (e.g. cx22: 2 vCPU 4GB, cpx31: 4 vCPU 8GB, cpx41: 8 vCPU 16GB).'
+    required: false
+    default: 'cpx31'
+  location:
+    description: 'Hetzner datacenter location (fsn1, nbg1, hel1, ash, hil).'
+    required: false
+    default: 'fsn1'
+  image:
+    description: 'OS image (default: ubuntu-24.04).'
+    required: false
+    default: 'ubuntu-24.04'
+  labels:
+    description: 'Comma-separated custom labels to assign to the GitHub runner.'
+    required: false
+    default: ''
+  runner_version:
+    description: 'GitHub Actions Runner version to install.'
+    required: false
+    default: '2.321.0'
+  wait_timeout_seconds:
+    description: 'Maximum time to wait for the runner to register and become online (seconds).'
+    required: false
+    default: '180'
+
+outputs:
+  label:
+    description: 'Unique runner label to target in `runs-on` (e.g. robin-runner-<run_id>).'
+  server_id:
+    description: 'Created Hetzner server ID to pass to the teardown step.'
+  server_ip:
+    description: 'Public IPv4 address of the created runner.'
+
+runs:
+  using: 'node20'
+  main: 'index.js'

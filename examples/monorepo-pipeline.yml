@@ -1,0 +1,103 @@
+name: RobinHood CI Monorepo Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # =========================================================================
+  # STEP 1: SMART PRUNE (Shield)
+  # Free GitHub runner inspects git diff in ~3s and determines affected modules
+  # =========================================================================
+  inspect:
+    name: 🛡️ RobinHood Smart Prune
+    runs-on: ubuntu-latest
+    outputs:
+      run_mobile: ${{ steps.prune.outputs.mobile }}
+      run_web: ${{ steps.prune.outputs.web }}
+      run_api: ${{ steps.prune.outputs.api }}
+      run_docs: ${{ steps.prune.outputs.docs }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
+
+      - name: Analyze Changes
+        uses: ./actions/smart-prune
+        id: prune
+        with:
+          filters: |
+            mobile: ['apps/mobile/**', 'packages/mobile-core/**']
+            web: ['apps/web/**', 'packages/ui-kit/**']
+            api: ['services/api/**', 'packages/shared-models/**']
+            docs: ['docs/**', '*.md']
+
+  # =========================================================================
+  # STEP 2: FAST JOBS (Standard Free Runners)
+  # Lightweight linting / docs check that only take seconds
+  # =========================================================================
+  docs-check:
+    name: 📄 Documentation Linter
+    needs: inspect
+    if: needs.inspect.outputs.run_docs == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Markdown
+        run: echo "Markdown files verified in 5s."
+
+  # =========================================================================
+  # STEP 3: HEAVY JOBS ON DISPOSABLE HETZNER RUNNER (Sword)
+  # Provision an 8 vCPU beast on Hetzner Cloud for pennies instead of
+  # paying GitHub for anemic, slow 2-core machines.
+  # =========================================================================
+  spawn-heavy-runner:
+    name: 🚀 Spawn Disposable Hetzner Runner
+    needs: inspect
+    if: needs.inspect.outputs.run_mobile == 'true' || needs.inspect.outputs.run_api == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      runner_label: ${{ steps.spawn.outputs.label }}
+      server_id: ${{ steps.spawn.outputs.server_id }}
+    steps:
+      - name: Launch 4-Core Cloud Beast
+        uses: ./actions/hetzner-runner
+        id: spawn
+        with:
+          mode: start
+          hcloud_token: ${{ secrets.HCLOUD_TOKEN }}
+          github_token: ${{ secrets.GH_RUNNER_PAT }}
+          server_type: cpx31 # 4 vCPU, 8 GB RAM (~0.015 € / hr)
+          location: fsn1
+
+  heavy-build-and-test:
+    name: ⚡ Heavy Build & Test (Hetzner Speed)
+    needs: [inspect, spawn-heavy-runner]
+    if: always() && needs.spawn-heavy-runner.result == 'success'
+    runs-on: ${{ needs.spawn-heavy-runner.outputs.runner_label }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Heavy Compilation & Unit Tests
+        run: |
+          echo "Running on high-performance disposable hardware!"
+          uname -a
+          nproc
+          free -h
+
+  teardown-heavy-runner:
+    name: 🛑 Destroy Hetzner Runner & Stop Billing
+    needs: [spawn-heavy-runner, heavy-build-and-test]
+    if: always() && needs.spawn-heavy-runner.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Destroy Cloud VM
+        uses: ./actions/hetzner-runner
+        with:
+          mode: stop
+          hcloud_token: ${{ secrets.HCLOUD_TOKEN }}
+          server_id: ${{ needs.spawn-heavy-runner.outputs.server_id }}
