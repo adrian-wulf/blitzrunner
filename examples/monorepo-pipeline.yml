@@ -1,4 +1,4 @@
-name: RobinHood CI Monorepo Pipeline
+name: BlitzRunner Monorepo CI Pipeline
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
   # Free GitHub runner inspects git diff in ~3s and determines affected modules
   # =========================================================================
   inspect:
-    name: 🛡️ RobinHood Smart Prune
+    name: 🛡️ BlitzRunner Smart Prune
     runs-on: ubuntu-latest
     outputs:
       run_mobile: ${{ steps.prune.outputs.mobile }}
@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 20
 
       - name: Analyze Changes
-        uses: ./actions/smart-prune
+        uses: adrian-wulf/blitzrunner/actions/smart-prune@v1
         id: prune
         with:
           filters: |
@@ -64,7 +64,7 @@ jobs:
       server_id: ${{ steps.spawn.outputs.server_id }}
     steps:
       - name: Launch 4-Core Cloud Beast
-        uses: ./actions/hetzner-runner
+        uses: adrian-wulf/blitzrunner/actions/hetzner-runner@v1
         id: spawn
         with:
           mode: start
@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Destroy Cloud VM
-        uses: ./actions/hetzner-runner
+        uses: adrian-wulf/blitzrunner/actions/hetzner-runner@v1
         with:
           mode: stop
           hcloud_token: ${{ secrets.HCLOUD_TOKEN }}

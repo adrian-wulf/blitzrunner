@@ -1,9 +1,9 @@
-name: 'RobinHood Ephemeral Cloud Runner'
+name: 'BlitzRunner Ephemeral Cloud Runner'
 description: 'Spawns disposable, high-performance cloud runners on Hetzner Cloud on demand for pennies.'
 author: 'Adrian Wulf (RobinHood dev)'
 branding:
-  icon: 'cpu'
-  color: 'orange'
+  icon: 'zap'
+  color: 'yellow'
 
 inputs:
   mode:
@@ -48,7 +48,7 @@ inputs:
 
 outputs:
   label:
-    description: 'Unique runner label to target in `runs-on` (e.g. robin-runner-<run_id>).'
+    description: 'Unique runner label to target in `runs-on` (e.g. blitz-runner-<run_id>).'
   server_id:
     description: 'Created Hetzner server ID to pass to the teardown step.'
   server_ip:

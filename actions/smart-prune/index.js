@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * RobinHood Smart Prune (GitHub Action)
+ * BlitzRunner Smart Prune (GitHub Action)
  * Philosophy: RobinHood dev (https://social-wulf.eu)
+ * Author: Adrian Wulf (https://github.com/adrian-wulf/blitzrunner)
  * 
  * Intelligent monorepo differential change detection.
  * Slashes unnecessary CI runs by pruning unchanged components.
@@ -27,11 +28,11 @@ function setOutput(name, value) {
 }
 
 function logInfo(msg) {
-  console.log(`\x1b[32m[RobinHood Smart Prune]\x1b[0m ${msg}`);
+  console.log(`\x1b[32m[BlitzRunner Smart Prune]\x1b[0m ${msg}`);
 }
 
 function logWarn(msg) {
-  console.log(`\x1b[33m[RobinHood Smart Prune WARNING]\x1b[0m ${msg}`);
+  console.log(`\x1b[33m[BlitzRunner Smart Prune WARNING]\x1b[0m ${msg}`);
 }
 
 // Minimalistic glob to regex converter supporting **, *, ?, extensions
@@ -255,8 +256,8 @@ function main() {
     const estimatedSavedMinutes = prunedModules.length * 5; // Conservative average of 5m per heavy job
     const estimatedSavingsUsd = (estimatedSavedMinutes * 0.008).toFixed(2);
 
-    let markdown = `## 🏹 RobinHood dev // Smart Prune Report\n\n`;
-    markdown += `> *Eliminating unnecessary cloud CI compute and corporate markups.* ([RobinHood dev](https://social-wulf.eu))\n\n`;
+    let markdown = `## ⚡ BlitzRunner // Smart Prune Report\n\n`;
+    markdown += `> *Sovereign, lightning-fast CI optimization under the RobinHood dev philosophy.* ([BlitzRunner](https://github.com/adrian-wulf/blitzrunner))\n\n`;
     markdown += `| Component / Module | Status | Action | Triggering Files |\n`;
     markdown += `| :--- | :---: | :---: | :--- |\n`;
 
@@ -274,7 +275,7 @@ function main() {
     markdown += `* 🛡️ **Jobs Pruned:** **${prunedModules.length} of ${filterKeys.length}** components skipped.\n`;
     markdown += `* ⏱️ **Estimated CI Time Saved:** **~${estimatedSavedMinutes} minutes**.\n`;
     markdown += `* 💰 **Estimated Cloud Haracz Saved:** **~$${estimatedSavingsUsd} USD**.\n\n`;
-    markdown += `*Powered by [RobinHood dev](https://social-wulf.eu) — Open Source developer sovereignty.*`;
+    markdown += `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://social-wulf.eu) — Open Source developer sovereignty.*`;
 
     try {
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown + '\n', 'utf8');

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * RobinHood CI - Command Line Interface
+ * BlitzRunner - Command Line Interface
  * Part of the RobinHood dev initiative (https://social-wulf.eu)
+ * Author: Adrian Wulf
  */
 
 const { execSync } = require('child_process');
@@ -9,26 +10,27 @@ const fs = require('fs');
 const path = require('path');
 
 function printBanner() {
-  console.log(`\x1b[32m
-  🏹 ═════════════════════════════════════════════════════════ 🏹
-     ROBINHOOD CI // CLI TOOL
-     Zero-Server, High-Speed CI under the RobinHood dev philosophy
-  🏹 ═════════════════════════════════════════════════════════ 🏹\x1b[0m
+  console.log(`\x1b[33m
+  ⚡ ═════════════════════════════════════════════════════════ ⚡
+     BLITZRUNNER // HIGH-SPEED CI & SMART PRUNE CLI
+     Zero-Server, High-Performance CI under RobinHood dev
+  ⚡ ═════════════════════════════════════════════════════════ ⚡\x1b[0m
 `);
 }
 
 function showHelp() {
   printBanner();
   console.log(`Użycie:
-  robinhood-ci diff [base_branch]   - Sprawdź lokalny git diff i które moduły zostaną pominięte
-  robinhood-ci estimate             - Oszacuj miesięczne oszczędności na GitHub Actions
-  robinhood-ci version              - Pokaż wersję
+  blitzrunner diff [base_branch]   - Sprawdź lokalny git diff i które moduły zostaną pominięte
+  blitzrunner estimate             - Oszacuj miesięczne oszczędności na GitHub Actions
+  blitzrunner version              - Pokaż wersję
 
 Opcje:
   --base, -b <branch>   Gałąź bazowa do porównania (domyślnie: main lub HEAD~1)
   --help, -h            Wyświetl pomoc
 
 Więcej informacji: https://social-wulf.eu
+GitHub: https://github.com/adrian-wulf/blitzrunner
 `);
 }
 
@@ -60,7 +62,7 @@ function runDiff(baseBranch = 'main') {
 
 function runEstimate() {
   printBanner();
-  console.log(`\x1b[36m[Kalkulator Oszczędności RobinHood dev]\x1b[0m\n`);
+  console.log(`\x1b[36m[Kalkulator Oszczędności BlitzRunner / RobinHood dev]\x1b[0m\n`);
 
   const pushesPerDay = 10;
   const avgJobMinutes = 25;
@@ -70,10 +72,10 @@ function runEstimate() {
   const billedMinutes = Math.max(0, totalMinutes - ghFreeTier);
   const ghCost = (billedMinutes * 0.008).toFixed(2);
 
-  // RobinHood CI savings: 70% pruned + Hetzner 4x speedup
+  // BlitzRunner savings: 70% pruned + Hetzner 4x speedup
   const prunedMinutes = Math.round(totalMinutes * 0.7);
   const remainingMinutes = totalMinutes - prunedMinutes;
-  const hetznerJobMinutes = Math.round(remainingMinutes / 4); // 4x faster
+  const hetznerJobMinutes = Math.round(remainingMinutes / 4); // 4x faster on 8-core bare metal
   const hetznerCost = (hetznerJobMinutes * (0.015 / 60)).toFixed(2); // CPX31 is 0.015 €/hr
   const totalSaved = (parseFloat(ghCost) - parseFloat(hetznerCost)).toFixed(2);
 
@@ -85,9 +87,9 @@ function runEstimate() {
   console.log(`Standardowy koszt w chmurze:`);
   console.log(`  ❌ Minuty na GitHub Actions: \x1b[31m$${ghCost} USD / miesiąc\x1b[0m (i godziny czekania na powolny build)\n`);
 
-  console.log(`Zestaw RobinHood CI (Smart Prune + Hetzner Runner):`);
+  console.log(`Zestaw BlitzRunner (Smart Prune + Hetzner Cloud):`);
   console.log(`  🛡️ Pominięto zadań (Smart Prune): \x1b[32m${prunedMinutes.toLocaleString()} minut (70%)\x1b[0m`);
-  console.log(`  ⚔️ Czas wykonania na 8-rdzeniowym Hetznerze: \x1b[32m${hetznerJobMinutes.toLocaleString()} min\x1b[0m (zamiast ${remainingMinutes} min)`);
+  console.log(`  ⚡ Czas wykonania na 8-rdzeniowym Hetznerze: \x1b[32m${hetznerJobMinutes.toLocaleString()} min\x1b[0m (zamiast ${remainingMinutes} min)`);
   console.log(`  💰 Koszt na Hetzner Cloud: \x1b[32m~${hetznerCost} € / miesiąc\x1b[0m`);
   console.log(`  🎉 \x1b[1;32mCzysta oszczędność do kieszeni: ~$${totalSaved} USD co miesiąc!\x1b[0m\n`);
   console.log(`Więcej na: https://social-wulf.eu\n`);
@@ -103,8 +105,8 @@ if (!command || command === '--help' || command === '-h' || command === 'help') 
 } else if (command === 'estimate' || command === 'cost') {
   runEstimate();
 } else if (command === 'version' || command === '-v') {
-  console.log(`robinhood-ci v1.0.0 (RobinHood dev)`);
+  console.log(`blitzrunner v1.0.0 (RobinHood dev)`);
 } else {
-  console.error(`Nieznana komenda: "${command}". Użyj "robinhood-ci --help"`);
+  console.error(`Nieznana komenda: "${command}". Użyj "blitzrunner --help"`);
   process.exit(1);
 }

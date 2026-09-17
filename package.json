@@ -1,11 +1,11 @@
 {
-  "name": "robinhood-ci",
+  "name": "blitzrunner",
   "version": "1.0.0",
   "description": "Zero-server, high-speed CI optimization suite under the RobinHood dev philosophy.",
-  "main": "bin/robinhood-ci.js",
+  "main": "bin/blitzrunner.js",
   "bin": {
-    "robinhood-ci": "bin/robinhood-ci.js",
-    "robin-ci": "bin/robinhood-ci.js"
+    "blitzrunner": "bin/blitzrunner.js",
+    "blitz": "bin/blitzrunner.js"
   },
   "scripts": {
     "test": "node test/prune.test.js"
@@ -17,13 +17,14 @@
     "hetzner",
     "runner",
     "ephemeral-runner",
-    "cost-saving",
+    "cost-optimization",
+    "blitzrunner",
     "robinhood-dev"
   ],
   "author": "Adrian Wulf (RobinHood dev)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adrian-wulf/robinhood-ci.git"
+    "url": "https://github.com/adrian-wulf/blitzrunner.git"
   }
 }

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * RobinHood Ephemeral Cloud Runner (GitHub Action)
+ * BlitzRunner Ephemeral Cloud Runner (GitHub Action)
  * Philosophy: RobinHood dev (https://social-wulf.eu)
+ * Author: Adrian Wulf (https://github.com/adrian-wulf/blitzrunner)
  * 
  * Auto-spawns disposable, high-performance VMs on Hetzner Cloud
  * to replace expensive and slow GitHub hosted runners.
@@ -25,19 +26,19 @@ function setOutput(name, value) {
 }
 
 function logInfo(msg) {
-  console.log(`\x1b[34m[RobinHood Runner]\x1b[0m ${msg}`);
+  console.log(`\x1b[34m[BlitzRunner]\x1b[0m ${msg}`);
 }
 
 function logSuccess(msg) {
-  console.log(`\x1b[32m[RobinHood Runner SUCCESS]\x1b[0m ${msg}`);
+  console.log(`\x1b[32m[BlitzRunner SUCCESS]\x1b[0m ${msg}`);
 }
 
 function logWarn(msg) {
-  console.log(`\x1b[33m[RobinHood Runner WARNING]\x1b[0m ${msg}`);
+  console.log(`\x1b[33m[BlitzRunner WARNING]\x1b[0m ${msg}`);
 }
 
 function logError(msg) {
-  console.error(`\x1b[31m[RobinHood Runner ERROR]\x1b[0m ${msg}`);
+  console.error(`\x1b[31m[BlitzRunner ERROR]\x1b[0m ${msg}`);
 }
 
 async function sleep(ms) {
@@ -163,7 +164,7 @@ async function deleteHetznerServer(hcloudToken, serverId) {
 
 // Build Cloud-Init Bash Script
 function buildUserData({ repo, regToken, runnerName, label, customLabels, runnerVersion }) {
-  const labelsList = ['self-hosted', 'linux', 'x64', 'robin-ephemeral', label];
+  const labelsList = ['self-hosted', 'linux', 'x64', 'blitz-ephemeral', label];
   if (customLabels) {
     customLabels.split(',').map(l => l.trim()).filter(Boolean).forEach(l => labelsList.push(l));
   }
@@ -220,8 +221,8 @@ async function handleStart() {
   }
 
   const uniqueSuffix = Math.random().toString(36).substring(2, 7);
-  const runnerName = `robin-${runId}-${uniqueSuffix}`;
-  const uniqueLabel = `robin-${runId}-${uniqueSuffix}`;
+  const runnerName = `blitz-${runId}-${uniqueSuffix}`;
+  const uniqueLabel = `blitz-${runId}-${uniqueSuffix}`;
 
   logInfo(`Generating registration token for repository "${repo}"...`);
   const regToken = await getGitHubRegistrationToken(repo, ghToken);
@@ -258,13 +259,13 @@ async function handleStart() {
   await waitForRunnerOnline(repo, ghToken, runnerName, timeoutSeconds);
 
   if (process.env.GITHUB_STEP_SUMMARY) {
-    const summaryMd = `### 🚀 RobinHood Ephemeral Cloud Runner Spawned\n` +
+    const summaryMd = `### ⚡ BlitzRunner // Ephemeral Cloud Runner Spawned\n` +
       `* **Provider:** Hetzner Cloud (${location})\n` +
       `* **Instance:** \`${serverType}\` (Disposable)\n` +
       `* **Target Label:** \`${uniqueLabel}\`\n` +
       `* **Server ID:** \`${server.id}\` (IP: \`${serverIp}\`)\n` +
       `* **Status:** 🟢 Online & Processing Job\n\n` +
-      `*Powered by [RobinHood dev](https://social-wulf.eu)*\n`;
+      `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://social-wulf.eu)*\n`;
     try {
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryMd, 'utf8');
     } catch (_) {}
@@ -287,11 +288,11 @@ async function handleStop() {
   await deleteHetznerServer(hcloudToken, serverId);
 
   if (process.env.GITHUB_STEP_SUMMARY) {
-    const summaryMd = `### 🛡️ RobinHood Ephemeral Runner Destroyed\n` +
+    const summaryMd = `### 🛡️ BlitzRunner // Ephemeral Runner Destroyed\n` +
       `* **Server ID:** \`${serverId}\`\n` +
       `* **Status:** 🛑 Terminated (Billing stopped)\n` +
       `* **Cost Estimate:** ~0.002 € – 0.005 € for job duration.\n\n` +
-      `*Powered by [RobinHood dev](https://social-wulf.eu)*\n`;
+      `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://social-wulf.eu)*\n`;
     try {
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryMd, 'utf8');
     } catch (_) {}
@@ -300,7 +301,7 @@ async function handleStop() {
 
 async function main() {
   const mode = getInput('mode', 'start').toLowerCase();
-  logInfo(`Starting RobinHood Runner Action in mode: "${mode}"`);
+  logInfo(`Starting BlitzRunner Action in mode: "${mode}"`);
 
   try {
     if (mode === 'start') {
