@@ -1,0 +1,19 @@
+services:
+  blitzrunner:
+    image: ghcr.io/adrian-wulf/blitzrunner:latest
+    container_name: blitzrunner
+    restart: unless-stopped
+    environment:
+      - REPO_URL=https://github.com/nietechniczny/Definium-GRC
+      - RUNNER_TOKEN=${RUNNER_TOKEN}
+      # Alternatively, use ACCESS_TOKEN (GitHub PAT) instead of RUNNER_TOKEN for automatic token renewal:
+      # - ACCESS_TOKEN=${ACCESS_TOKEN}
+      - RUNNER_NAME=${RUNNER_NAME:-blitzrunner-vps}
+      - RUNNER_LABELS=${RUNNER_LABELS:-blitzrunner,self-hosted,linux,arm64}
+      - RUNNER_WORKDIR=/home/runner/_work
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_data:/home/runner/_work
+
+volumes:
+  runner_data:

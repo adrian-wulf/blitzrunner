@@ -43,9 +43,10 @@
 5. [🚀 Szybki Start](#-szybki-start)
 6. [🛡️ Tarcza: Akcja Smart Prune](#️-tarcza-akcja-smart-prune)
 7. [⚔️ Miecz: Jednorazowy Runner Chmurowy](#️-miecz-jednorazowy-runner-chmurowy)
-8. [🛠️ Narzędzie Konsolowe CLI & Kalkulator ROI](#️-narzędzie-konsolowe-cli--kalkulator-roi)
-9. [☕ Wesprzyj Projekt & Filozofia RobinHood dev](#-wesprzyj-projekt--filozofia-robinhood-dev)
-10. [⚖️ Impressum & Nota Prawna (§ 5 DDG / MIT)](#️-impressum--nota-prawna--5-ddg--mit)
+8. [🐳 Docker & Coolify Runner na Własnym VPS](#-docker--coolify-runner-na-własnym-vps)
+9. [🛠️ Narzędzie Konsolowe CLI & Kalkulator ROI](#️-narzędzie-konsolowe-cli--kalkulator-roi)
+10. [☕ Wesprzyj Projekt & Filozofia RobinHood dev](#-wesprzyj-projekt--filozofia-robinhood-dev)
+11. [⚖️ Impressum & Nota Prawna (§ 5 DDG / MIT)](#️-impressum--nota-prawna--5-ddg--mit)
 
 ---
 
@@ -241,6 +242,49 @@ Akcja `adrian-wulf/blitzrunner/actions/hetzner-runner@v1` zarządza maszynami pr
 | `server_type` | Typ instancji (`cx22`, `cpx31`, `cpx41`, `ccx23`). | `cpx31` | Nie |
 | `location` | Centrum danych (`fsn1`, `nbg1`, `hel1`, `ash`, `hil`). | `fsn1` | Nie |
 | `server_id` | ID serwera do usunięcia (wymagane przy `mode: stop`). | Brak | Dla stop |
+
+---
+
+## 🐳 Docker & Coolify Runner na Własnym VPS
+
+BlitzRunner udostępnia oficjalny, wieloarchitekturorowy obraz Docker (`linux/amd64`, `linux/arm64`), dzięki któremu uruchomisz własnego, stałego runnera na dowolnym VPS (np. Oracle Cloud ARM64, Hetzner, Coolify czy domowy serwer).
+
+### Szybkie uruchomienie (Docker Compose / Coolify)
+
+```yaml
+services:
+  blitzrunner:
+    image: ghcr.io/adrian-wulf/blitzrunner:latest
+    container_name: blitzrunner
+    restart: unless-stopped
+    environment:
+      - REPO_URL=https://github.com/twoja-organizacja/twoje-repo
+      - RUNNER_TOKEN=TWOJ_TOKEN_REJESTRACYJNY_RUNNERA
+      # Lub podaj ACCESS_TOKEN (GitHub PAT), aby tokeny odnawiały się automatycznie:
+      # - ACCESS_TOKEN=ghp_...
+      - RUNNER_NAME=blitzrunner-vps
+      - RUNNER_LABELS=blitzrunner,self-hosted,linux
+      - RUNNER_WORKDIR=/home/runner/_work
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_data:/home/runner/_work
+
+volumes:
+  runner_data:
+```
+
+### Zmienne środowiskowe kontenera
+
+| Zmienna | Opis | Wartość domyślna |
+| :--- | :--- | :---: |
+| `REPO_URL` | Adres URL repozytorium (`https://github.com/org/repo`) lub organizacji. | **Wymagane** |
+| `RUNNER_TOKEN` | Jednorazowy token z ustawień GitHub Actions. | Wymagane (lub `ACCESS_TOKEN`) |
+| `ACCESS_TOKEN` | GitHub PAT (zakres `repo`), pozwala na automatyczne odnawianie i usuwanie runnera. | Opcjonalne |
+| `RUNNER_NAME` | Nazwa runnera widoczna na GitHubie. | `blitzrunner-<hostname>` |
+| `RUNNER_LABELS` | Etykiety po przecinku dla parametru `runs-on`. | `blitzrunner,self-hosted,linux,<arch>` |
+| `RUNNER_WORKDIR` | Ścieżka robocza zadań runnera. | `_work` |
+| `EPHEMERAL` | Zakończ kontener natychmiast po wykonaniu pojedynczego zadania. | `false` |
+| `DISABLE_AUTO_UPDATE` | Wyłącz automatyczne aktualizacje binarne przez GitHuba. | `true` |
 
 ---
 

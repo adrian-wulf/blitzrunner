@@ -43,9 +43,10 @@
 5. [🚀 Quick Start](#-quick-start)
 6. [🛡️ Shield: Smart Prune Action](#️-shield-smart-prune-action)
 7. [⚔️ Sword: Ephemeral Cloud Runner](#️-sword-ephemeral-cloud-runner)
-8. [🛠️ CLI Diagnostics & Local ROI Calculator](#️-cli-diagnostics--local-roi-calculator)
-9. [☕ Support the Project & RobinHood dev](#-support-the-project--robinhood-dev)
-10. [⚖️ Impressum & Legal Notice (§ 5 DDG / MIT)](#️-impressum--legal-notice--5-ddg--mit)
+8. [🐳 Docker & Coolify Self-Hosted Runner](#-docker--coolify-self-hosted-runner)
+9. [🛠️ CLI Diagnostics & Local ROI Calculator](#️-cli-diagnostics--local-roi-calculator)
+10. [☕ Support the Project & RobinHood dev](#-support-the-project--robinhood-dev)
+11. [⚖️ Impressum & Legal Notice (§ 5 DDG / MIT)](#️-impressum--legal-notice--5-ddg--mit)
 
 ---
 
@@ -241,6 +242,49 @@ The `adrian-wulf/blitzrunner/actions/hetzner-runner@v1` action provisions bare-m
 | `server_type` | Instance type (`cx22`, `cpx31`, `cpx41`, `ccx23`). | `cpx31` | No |
 | `location` | Datacenter (`fsn1`, `nbg1`, `hel1`, `ash`, `hil`). | `fsn1` | No |
 | `server_id` | Server ID to destroy (required for `mode: stop`). | N/A | For stop |
+
+---
+
+## 🐳 Docker & Coolify Self-Hosted Runner
+
+BlitzRunner includes an official multi-arch Docker image (`linux/amd64`, `linux/arm64`) enabling you to run your own persistent self-hosted runner on any VPS (e.g. Oracle Cloud ARM64, Hetzner, Coolify, or homelab).
+
+### Quick Run with Docker Compose / Coolify
+
+```yaml
+services:
+  blitzrunner:
+    image: ghcr.io/adrian-wulf/blitzrunner:latest
+    container_name: blitzrunner
+    restart: unless-stopped
+    environment:
+      - REPO_URL=https://github.com/your-org/your-repo
+      - RUNNER_TOKEN=YOUR_GITHUB_RUNNER_REGISTRATION_TOKEN
+      # Or provide ACCESS_TOKEN (GitHub PAT) for automatic token renewal:
+      # - ACCESS_TOKEN=ghp_...
+      - RUNNER_NAME=blitzrunner-vps
+      - RUNNER_LABELS=blitzrunner,self-hosted,linux
+      - RUNNER_WORKDIR=/home/runner/_work
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_data:/home/runner/_work
+
+volumes:
+  runner_data:
+```
+
+### Configuration Environment Variables
+
+| Variable | Description | Default |
+| :--- | :--- | :---: |
+| `REPO_URL` | Target repository (`https://github.com/org/repo`) or organization URL. | **Required** |
+| `RUNNER_TOKEN` | Registration token from GitHub Actions Settings. | Required (or `ACCESS_TOKEN`) |
+| `ACCESS_TOKEN` | GitHub PAT with repo scope to automatically acquire registration & removal tokens. | Optional |
+| `RUNNER_NAME` | Runner name in GitHub UI. | `blitzrunner-<hostname>` |
+| `RUNNER_LABELS` | Comma-separated labels for `runs-on`. | `blitzrunner,self-hosted,linux,<arch>` |
+| `RUNNER_WORKDIR` | Directory where runner executes jobs. | `_work` |
+| `EPHEMERAL` | Terminate runner container after executing a single job. | `false` |
+| `DISABLE_AUTO_UPDATE` | Disable GitHub auto-update to prevent container restarts. | `true` |
 
 ---
 
