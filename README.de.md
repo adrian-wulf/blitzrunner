@@ -128,6 +128,32 @@ jobs:
 
 ---
 
+## 🐳 Docker & Coolify Self-Hosted Runner (VPS / Bare-Metal)
+
+BlitzRunner enthält ein offizielles Multi-Arch Docker-Image (`linux/amd64`, `linux/arm64`), um eigene permanente Runner auf beliebigen VPS (Coolify, Oracle Cloud ARM64, Hetzner) zu betreiben.
+
+```yaml
+services:
+  blitzrunner:
+    image: ghcr.io/adrian-wulf/blitzrunner:latest
+    container_name: blitzrunner
+    restart: unless-stopped
+    environment:
+      - REPO_URL=https://github.com/org/repo
+      - RUNNER_TOKEN=IHR_GITHUB_RUNNER_TOKEN
+      - RUNNER_NAME=blitzrunner-vps
+      - RUNNER_LABELS=blitzrunner,self-hosted,linux
+      - RUNNER_WORKDIR=/home/runner/_work
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_data:/home/runner/_work
+
+volumes:
+  runner_data:
+```
+
+---
+
 ## ☕ Projekt unterstützen & RobinHood dev
 
 * ☕ **Buy Me a Coffee:** [buymeacoffee.com/adrianwulf](https://buymeacoffee.com/adrianwulf)

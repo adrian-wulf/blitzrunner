@@ -30,6 +30,7 @@
 
 * **🛡️ Smart Prune (El Escudo):** Inspecciona el `git diff` en ~3 segundos. Si un commit no modificó un módulo, cancela los trabajos dependientes inmediatamente. Ahorra hasta un **70% de minutos CI**.
 * **⚔️ Ephemeral Cloud Runner (La Espada):** Provee en 15 segundos un servidor dedicado de **4 a 8 vCPU** en Hetzner Cloud. Ejecuta pruebas **4 veces más rápido** y se destruye automáticamente al terminar.
+* **🐳 Docker & Coolify Runner:** Imagen multi-arquitectura (`linux/amd64`, `linux/arm64`) para desplegar un runner autónomo permanente en tu propio VPS o Coolify a coste cero.
 * **⚡ Arquitectura Zero-Server:** **Sin servidores dedicados 24/7.** Solo pagas por los 2–3 minutos de compilación real (~0,003 € por ejecución).
 
 ---

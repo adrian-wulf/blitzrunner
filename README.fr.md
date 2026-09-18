@@ -30,6 +30,7 @@
 
 * **🛡️ Smart Prune (Le Bouclier) :** Analyse le `git diff` en ~3 secondes. Si un commit ne touche pas un module, BlitzRunner annule immédiatement les builds associés. Économise jusqu'à **70% de temps de calcul CI**.
 * **⚔️ Ephemeral Cloud Runner (L'Épée) :** Déploie en 15 secondes une machine dédiée de **4 à 8 vCPU** sur Hetzner Cloud. Exécute les tests **4x plus vite** et s'auto-détruit aussitôt la tâche finie.
+* **🐳 Docker & Coolify Runner :** Image multi-architecture (`linux/amd64`, `linux/arm64`) pour déployer un runner persistant et autonome sur votre propre VPS ou Coolify sans surcoût.
 * **⚡ Architecture Zero-Server :** **Aucun serveur 24/7 requis.** Vous ne payez que pour les 2–3 minutes d'utilisation réelle (~0,003 € par build).
 
 ---
