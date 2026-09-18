@@ -43,11 +43,17 @@ RUN useradd -m -s /bin/bash -u 1001 runner \
 WORKDIR /home/runner
 
 # Download and extract the appropriate GitHub Actions runner binary based on architecture
-RUN case "${TARGETARCH}" in \
-        "amd64"|"") ARCH="x64" ;; \
-        "arm64") ARCH="arm64" ;; \
-        *) echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
+RUN if [ -z "${TARGETARCH}" ]; then \
+        TARGET_DETECTED="$(dpkg --print-architecture)"; \
+    else \
+        TARGET_DETECTED="${TARGETARCH}"; \
+    fi \
+    && case "${TARGET_DETECTED}" in \
+        "amd64"|"x64") ARCH="x64" ;; \
+        "arm64"|"aarch64") ARCH="arm64" ;; \
+        *) echo "Unsupported architecture: ${TARGET_DETECTED}" && exit 1 ;; \
     esac \
+    && echo "Building BlitzRunner for architecture: ${ARCH}" \
     && curl -fL "https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz" -o runner.tar.gz \
     && tar xzf runner.tar.gz \
     && rm -f runner.tar.gz \
