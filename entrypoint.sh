@@ -20,7 +20,24 @@ if [ -z "$REPO_URL" ]; then
     exit 1
 fi
 
+RUNNER_NAME="${RUNNER_NAME:-blitzrunner-$(hostname)}"
+
+# Already registered (container restart, e.g. after a host reboot): the runner keeps its
+# registration in .runner/.credentials — config.sh would fail with "already configured"
+# and the registration token from first start has long expired, so just start it.
+if [ -f .runner ] && [ -f .credentials ]; then
+    echo "=================================================="
+    echo "  ⚡ BlitzRunner: already configured, starting"
+    echo "  Name:    $RUNNER_NAME"
+    echo "=================================================="
+    ALREADY_CONFIGURED=true
+else
+    ALREADY_CONFIGURED=false
+fi
+
 TOKEN="${RUNNER_TOKEN:-}"
+
+if [ "$ALREADY_CONFIGURED" = "false" ]; then
 
 # Auto-acquire registration token via Personal Access Token if RUNNER_TOKEN is not provided
 if [ -z "$TOKEN" ] && [ -n "${ACCESS_TOKEN:-}" ]; then
@@ -49,7 +66,6 @@ if [ -z "$TOKEN" ]; then
     exit 1
 fi
 
-RUNNER_NAME="${RUNNER_NAME:-blitzrunner-$(hostname)}"
 RUNNER_WORKDIR="${RUNNER_WORKDIR:-_work}"
 ARCH=$(uname -m)
 DEFAULT_LABELS="blitzrunner,self-hosted,linux,${ARCH}"
@@ -86,7 +102,17 @@ echo "=================================================="
 
 ./config.sh "${CONFIG_ARGS[@]}"
 
+fi
+
 cleanup() {
+    # A plain stop/restart keeps the registration (otherwise the next start would need a fresh
+    # token). Deregister only for ephemeral runners or when explicitly asked to.
+    if [ "${EPHEMERAL:-false}" != "true" ] && [ "${DEREGISTER_ON_STOP:-false}" != "true" ]; then
+        echo "Caught shutdown signal. Stopping BlitzRunner (registration kept)..."
+        kill -TERM "$RUN_PID" 2>/dev/null || true
+        wait "$RUN_PID" 2>/dev/null || true
+        exit 0
+    fi
     echo "Caught shutdown signal. Deregistering BlitzRunner..."
     REMOVE_TOKEN="$TOKEN"
     if [ -n "${ACCESS_TOKEN:-}" ]; then
