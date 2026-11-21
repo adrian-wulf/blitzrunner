@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://social-wulf.eu"><img src="https://img.shields.io/badge/Ökosystem-social--wulf.eu-0ea5e9?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Wulf Hub"></a>
+  <a href="https://wulf-code.eu"><img src="https://img.shields.io/badge/Ökosystem-wulf--code.eu-0ea5e9?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Wulf Hub"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Lizenz-MIT-amber.svg?style=for-the-badge" alt="MIT Lizenz"></a>
   <img src="https://img.shields.io/badge/Ersparnis-Bis_zu_90%25-10b981?style=for-the-badge&logo=cashapp" alt="Bis zu 90% Ersparnis">
   <img src="https://img.shields.io/badge/Architektur-Zero--Server-3b82f6?style=for-the-badge&logo=serverless" alt="Zero-Server">
@@ -57,9 +57,8 @@ BlitzRunner ist Teil einer unabhängigen Suite moderner Entwickler- und Business
 | Dienst / Projekt | URL | Zweck |
 | :--- | :---: | :--- |
 | ⚡ **BlitzRunner** | [github.com/adrian-wulf/blitzrunner](https://github.com/adrian-wulf/blitzrunner) | **Zero-Server CI Optimizer:** Senkt CI-Kosten um 90% und beschleunigt Builds 4x. |
-| 🛡️ **Nachtwache** | [sentry.social-wulf.eu](https://sentry.social-wulf.eu) | **Autonomer Fehlerwächter & Sentry-Ersatz:** Single Rust Binary, ~15 MB RAM, SQLite WAL und integrierter AI Auto-Fix ([GitHub](https://github.com/adrian-wulf/nachtwache)). |
-| 🚀 **Wulf Lead.er** | [lead.social-wulf.eu](https://lead.social-wulf.eu) | **B2B Lead Intelligence & Web Auditor:** Lokale Akquise mit OpenStreetMap und Gemini OSINT ([GitHub](https://github.com/adrian-wulf/wulf-lead-er)). |
-| 🌐 **Zentraler Wulf Hub** | [social-wulf.eu](https://social-wulf.eu) | **Haupt-Ökosystem:** Entwickler-Portfolio und Unabhängigkeits-Portal von Adrian Wulf. |
+| 🛡️ **Nachtwache** | [adrian-wulf/nachtwache](https://github.com/adrian-wulf/nachtwache) | **Autonomer Fehlerwächter & Sentry-Ersatz:** Single Rust Binary, ~15 MB RAM, SQLite WAL und integrierter AI Auto-Fix ([GitHub](https://github.com/adrian-wulf/nachtwache)). |
+| 🌐 **Zentraler Wulf Hub** | [wulf-code.eu](https://wulf-code.eu) | **Haupt-Ökosystem:** Entwickler-Portfolio und Unabhängigkeits-Portal von Adrian Wulf. |
 | 💼 **Wulf Code** | [wulf-code.it](https://wulf-code.it) | **Software House & Beratung:** Hochleistungssysteme, Cloud-Architektur und Sicherheitsaudits. |
 
 ---
@@ -167,5 +166,5 @@ volumes:
 ## ⚖️ Impressum & Rechtliche Hinweise (§ 5 DDG / MIT)
 
 * **Autor:** Adrian Wulf
-* **Kontakt:** `contact@social-wulf.eu` | [social-wulf.eu](https://social-wulf.eu)
+* **Kontakt:** `kontakt@wulf-code.eu` | [wulf-code.eu](https://wulf-code.eu)
 * **Lizenz:** [MIT Lizenz](LICENSE) — 100% frei und Open Source.

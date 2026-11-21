@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://social-wulf.eu"><img src="https://img.shields.io/badge/Ecosystem-social--wulf.eu-0ea5e9?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Wulf Hub"></a>
+  <a href="https://wulf-code.eu"><img src="https://img.shields.io/badge/Ecosystem-wulf--code.eu-0ea5e9?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Wulf Hub"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-amber.svg?style=for-the-badge" alt="MIT License"></a>
   <img src="https://img.shields.io/badge/Cost_Savings-Up_to_90%25-10b981?style=for-the-badge&logo=cashapp" alt="Up to 90% Savings">
   <img src="https://img.shields.io/badge/Architecture-Zero--Server-3b82f6?style=for-the-badge&logo=serverless" alt="Zero-Server">
@@ -74,9 +74,8 @@ BlitzRunner is an integral part of an independent suite of modern developer and 
 | Service / Project | Live URL | Purpose |
 | :--- | :---: | :--- |
 | ⚡ **BlitzRunner** | [github.com/adrian-wulf/blitzrunner](https://github.com/adrian-wulf/blitzrunner) | **Zero-Server CI Optimizer & Ephemeral Runner:** Cuts CI costs by 90% and accelerates builds 4x on disposable cloud compute. |
-| 🛡️ **Nachtwache** | [sentry.social-wulf.eu](https://sentry.social-wulf.eu) | **Autonomous Error Tracker & Sentry Replacement:** Single Rust binary, ~15 MB RAM, SQLite WAL, and built-in AI Auto-Fix ([GitHub](https://github.com/adrian-wulf/nachtwache)). |
-| 🚀 **Wulf Lead.er** | [lead.social-wulf.eu](https://lead.social-wulf.eu) | **B2B Lead Intelligence Radar & Web Auditor:** Local prospecting via OpenStreetMap, technical audits (SSL, TTFB, RWD), and Gemini OSINT ([GitHub](https://github.com/adrian-wulf/wulf-lead-er)). |
-| 🌐 **Central Wulf Hub** | [social-wulf.eu](https://social-wulf.eu) | **Main Ecosystem Showcase:** Technology portfolio and developer sovereignty portal by Adrian Wulf. |
+| 🛡️ **Nachtwache** | [adrian-wulf/nachtwache](https://github.com/adrian-wulf/nachtwache) | **Autonomous Error Tracker & Sentry Replacement:** Single Rust binary, ~15 MB RAM, SQLite WAL, and built-in AI Auto-Fix ([GitHub](https://github.com/adrian-wulf/nachtwache)). |
+| 🌐 **Central Wulf Hub** | [wulf-code.eu](https://wulf-code.eu) | **Main Ecosystem Showcase:** Technology portfolio and developer sovereignty portal by Adrian Wulf. |
 | 💼 **Wulf Code** | [wulf-code.it](https://wulf-code.it) | **Software House & Consulting:** High-performance infrastructure, cloud architecture, and security audits. |
 
 ---
@@ -322,6 +321,6 @@ Big Tech extracts inflated margins by throttling standard runners and running te
 ## ⚖️ Impressum & Legal Notice (§ 5 DDG / MIT)
 
 * **Author:** Adrian Wulf
-* **Contact:** `contact@social-wulf.eu` | [social-wulf.eu](https://social-wulf.eu)
+* **Contact:** `kontakt@wulf-code.eu` | [wulf-code.eu](https://wulf-code.eu)
 * **License:** [MIT License](LICENSE) — free for personal and commercial use.
 * **Compliance:** Developed in accordance with § 5 DDG (Telemediengesetz) and EU DSGVO / GDPR principles. Zero telemetry, zero tracking.
