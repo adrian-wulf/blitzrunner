@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * BlitzRunner - Command Line Interface
- * Part of the RobinHood dev initiative (https://social-wulf.eu)
+ * Part of the RobinHood dev initiative (https://wulf-code.eu)
  * Author: Adrian Wulf
  */
 
@@ -29,7 +29,7 @@ Opcje:
   --base, -b <branch>   Gałąź bazowa do porównania (domyślnie: main lub HEAD~1)
   --help, -h            Wyświetl pomoc
 
-Więcej informacji: https://social-wulf.eu
+Więcej informacji: https://wulf-code.eu
 GitHub: https://github.com/adrian-wulf/blitzrunner
 `);
 }
@@ -92,7 +92,7 @@ function runEstimate() {
   console.log(`  ⚡ Czas wykonania na 8-rdzeniowym Hetznerze: \x1b[32m${hetznerJobMinutes.toLocaleString()} min\x1b[0m (zamiast ${remainingMinutes} min)`);
   console.log(`  💰 Koszt na Hetzner Cloud: \x1b[32m~${hetznerCost} € / miesiąc\x1b[0m`);
   console.log(`  🎉 \x1b[1;32mCzysta oszczędność do kieszeni: ~$${totalSaved} USD co miesiąc!\x1b[0m\n`);
-  console.log(`Więcej na: https://social-wulf.eu\n`);
+  console.log(`Więcej na: https://wulf-code.eu\n`);
 }
 
 const args = process.argv.slice(2);

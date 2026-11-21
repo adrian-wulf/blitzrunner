@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * BlitzRunner Smart Prune (GitHub Action)
- * Philosophy: RobinHood dev (https://social-wulf.eu)
+ * Philosophy: RobinHood dev (https://wulf-code.eu)
  * Author: Adrian Wulf (https://github.com/adrian-wulf/blitzrunner)
  * 
  * Intelligent monorepo differential change detection.
@@ -275,7 +275,7 @@ function main() {
     markdown += `* 🛡️ **Jobs Pruned:** **${prunedModules.length} of ${filterKeys.length}** components skipped.\n`;
     markdown += `* ⏱️ **Estimated CI Time Saved:** **~${estimatedSavedMinutes} minutes**.\n`;
     markdown += `* 💰 **Estimated Cloud Haracz Saved:** **~$${estimatedSavingsUsd} USD**.\n\n`;
-    markdown += `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://social-wulf.eu) — Open Source developer sovereignty.*`;
+    markdown += `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://wulf-code.eu) — Open Source developer sovereignty.*`;
 
     try {
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown + '\n', 'utf8');

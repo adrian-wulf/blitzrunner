@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * BlitzRunner Ephemeral Cloud Runner (GitHub Action)
- * Philosophy: RobinHood dev (https://social-wulf.eu)
+ * Philosophy: RobinHood dev (https://wulf-code.eu)
  * Author: Adrian Wulf (https://github.com/adrian-wulf/blitzrunner)
  * 
  * Auto-spawns disposable, high-performance VMs on Hetzner Cloud
@@ -265,7 +265,7 @@ async function handleStart() {
       `* **Target Label:** \`${uniqueLabel}\`\n` +
       `* **Server ID:** \`${server.id}\` (IP: \`${serverIp}\`)\n` +
       `* **Status:** 🟢 Online & Processing Job\n\n` +
-      `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://social-wulf.eu)*\n`;
+      `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://wulf-code.eu)*\n`;
     try {
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryMd, 'utf8');
     } catch (_) {}
@@ -292,7 +292,7 @@ async function handleStop() {
       `* **Server ID:** \`${serverId}\`\n` +
       `* **Status:** 🛑 Terminated (Billing stopped)\n` +
       `* **Cost Estimate:** ~0.002 € – 0.005 € for job duration.\n\n` +
-      `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://social-wulf.eu)*\n`;
+      `*Powered by [BlitzRunner](https://github.com/adrian-wulf/blitzrunner) & [RobinHood dev](https://wulf-code.eu)*\n`;
     try {
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryMd, 'utf8');
     } catch (_) {}

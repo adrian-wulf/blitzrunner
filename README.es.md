@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://social-wulf.eu"><img src="https://img.shields.io/badge/Ecosistema-social--wulf.eu-0ea5e9?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Wulf Hub"></a>
+  <a href="https://wulf-code.eu"><img src="https://img.shields.io/badge/Ecosistema-wulf--code.eu-0ea5e9?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Wulf Hub"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Licencia-MIT-amber.svg?style=for-the-badge" alt="Licencia MIT"></a>
   <img src="https://img.shields.io/badge/Ahorro-Hasta_un_90%25-10b981?style=for-the-badge&logo=cashapp" alt="Hasta 90% de Ahorro">
   <img src="https://img.shields.io/badge/Arquitectura-Zero--Server-3b82f6?style=for-the-badge&logo=serverless" alt="Zero-Server">
@@ -40,8 +40,7 @@
 | Servicio / Proyecto | URL | Propósito |
 | :--- | :---: | :--- |
 | ⚡ **BlitzRunner** | [github.com/adrian-wulf/blitzrunner](https://github.com/adrian-wulf/blitzrunner) | **Optimizador CI/CD Zero-Server:** Reduce costes un 90% y acelera compilaciones 4x. |
-| 🛡️ **Nachtwache** | [sentry.social-wulf.eu](https://sentry.social-wulf.eu) | **Monitor de Errores & Alternativa a Sentry:** Binario Rust único, ~15 MB RAM y AI Auto-Fix ([GitHub](https://github.com/adrian-wulf/nachtwache)). |
-| 🚀 **Wulf Lead.er** | [lead.social-wulf.eu](https://lead.social-wulf.eu) | **Radar de Leads B2B & Auditor Web:** Prospección local con OpenStreetMap y Gemini OSINT ([GitHub](https://github.com/adrian-wulf/wulf-lead-er)). |
+| 🛡️ **Nachtwache** | [adrian-wulf/nachtwache](https://github.com/adrian-wulf/nachtwache) | **Monitor de Errores & Alternativa a Sentry:** Binario Rust único, ~15 MB RAM y AI Auto-Fix ([GitHub](https://github.com/adrian-wulf/nachtwache)). |
 
 ---
 
@@ -54,5 +53,5 @@
 
 ## ⚖️ Aviso Legal (§ 5 DDG / MIT)
 
-* **Autor:** Adrian Wulf | [social-wulf.eu](https://social-wulf.eu)
+* **Autor:** Adrian Wulf | [wulf-code.eu](https://wulf-code.eu)
 * **Licencia:** [Licencia MIT](LICENSE) — 100% libre y Open Source.
